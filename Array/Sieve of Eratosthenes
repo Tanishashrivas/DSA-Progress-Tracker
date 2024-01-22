@@ -1,0 +1,23 @@
+class Solution {
+    public int countPrimes(int n) {
+        int count=0;
+        boolean prime[] = new boolean[n+1];//why n+1?bcoz 0 bhi toh store hoga (0 to n)
+        for (int i = 2; i <= n; i++) {//in java boolean arrays are initialized by false
+            prime[i] = true;
+        }
+
+        for(int i=2;i*i<=n;i++){
+            if(prime[i]){
+                for(int j=i*i;j<=n;j+=i){
+                    prime[j] = false;
+                }
+            }
+        }
+
+        for(int i=2;i<n;i++){
+            if(prime[i]) count++;
+        }
+
+        return count;
+    }
+}
