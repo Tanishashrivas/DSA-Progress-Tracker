@@ -1,0 +1,21 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+	public static boolean checkPalindrome(String str) {
+	
+	    // WRITE YOUR CODE HERE	
+		str = str.toLowerCase().replaceAll("[^A-Za-z0-9]", "").replaceAll("//s+", "");
+		return isPal(str, 0, str.length()-1);
+	}
+
+	static boolean isPal(String str, int i, int j){
+		if(i>j)
+		return true;
+
+        if(str.charAt(i)!=str.charAt(j))
+		return false;
+		else
+		return isPal(str, i+1, j-1);
+	}
+}
