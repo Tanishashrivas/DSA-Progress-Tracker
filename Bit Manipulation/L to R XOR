@@ -1,0 +1,21 @@
+public class Solution {
+    public static int findXOR(int L, int R){
+        // Write your code here.
+        int a = xor(L-1);//xor of nu till l-1
+        int b = xor(R); // till r
+
+        return a^b;//kyuki jab l=r it will miss xoring them
+    }
+
+public static int xor(int x){
+        if(x%4==0) return x;
+        
+        if(x%4==1) return 1;
+        
+        if(x%4==2) return x+1;
+        
+        if(x%4==3) return 0;
+
+        return -1;
+    }
+}
