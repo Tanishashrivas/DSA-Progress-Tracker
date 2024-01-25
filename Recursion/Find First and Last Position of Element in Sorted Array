@@ -1,0 +1,39 @@
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int[] ans = new int[2];
+
+        ans[0] = firstOcc(nums, target, 0, nums.length-1, -1);
+        ans[1] = lastOcc(nums, target, 0, nums.length-1, -1);
+
+        return ans;
+    }
+    int firstOcc(int[] nums,  int t, int s,  int e, int a){
+        int mid = s + (e-s)/2;
+
+        if(s>e)return a;
+
+        if(nums[mid]==t){
+            a = mid;
+            return firstOcc(nums, t, 0, mid-1, a);
+        }
+        else if(nums[mid]>t){
+            return firstOcc(nums, t, 0, mid-1, a);
+        }
+        else 
+        return firstOcc(nums, t, mid+1,e, a);
+    }
+    int lastOcc(int[] nums,  int t, int s,  int e, int b){
+        int mid = s + (e-s)/2;
+        if(s>e) return b;
+        
+        if(nums[mid]==t){
+            b = mid;
+            return lastOcc(nums, t, mid+1, e, b);
+        }
+         else if(nums[mid]>t){
+            return lastOcc(nums, t, 0, mid-1, b);
+        }
+        else 
+        return lastOcc(nums, t, mid+1,e, b);
+    }
+}
