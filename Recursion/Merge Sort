@@ -1,0 +1,66 @@
+class Solution {
+    public int[] sortArray(int[] nums) {
+       mergeSort(nums, 0, nums.length-1);
+       return nums;
+    }
+
+    void mergeSort(int[] nums, int start, int end){
+        if(start>=end) return;
+
+        int mid = start + (end-start)/2;
+
+        mergeSort(nums, start, mid);
+        mergeSort(nums, mid+1, end);
+
+        //merge func to merge the above two arrays in sorted order!
+        merge(nums, start, mid, end);
+    }
+
+    void merge(int[] nums, int start, int mid, int end){
+        int length1 = mid-start+1;
+        int length2 = end-mid;
+
+        int[] left = new int[length1];
+        int[] right = new int[length2];
+
+        //pushing values into the temporary array
+        int first=0, second=0;
+        for(int i=start;i<=end;i++){
+            if(i<=mid){
+                left[first++] = nums[i];
+            }
+            else{
+                right[second++] = nums[i];
+            }
+        }
+        // print(left);
+        // print(right);
+        //Using merge two sorted arrays logic
+        int originalIndex = start;//take index from start 
+        first = 0; second = 0; 
+        while(first<length1 && second<length2){
+            if(left[first]<right[second]){
+                nums[originalIndex++] = left[first++];
+            }
+            else{
+                nums[originalIndex++] = right[second++];
+            }
+        }
+
+        while(first<length1){
+            nums[originalIndex++] = left[first++];
+        }
+        while(second<length2){
+            nums[originalIndex++] = right[second++];
+        }
+
+        // print(nums);
+    }
+
+    // void print(int[] arr){
+    //     for(int i:arr)
+    //     System.out.print(i+" ");
+
+    //     System.out.println();
+    // }
+}
