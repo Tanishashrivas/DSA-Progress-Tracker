@@ -1,0 +1,45 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static List<Integer> quickSort(List<Integer> arr){
+        // Write your code here.
+        Quick(arr, 0, arr.size()-1);
+        return arr;
+    }
+
+    static void Quick(List<Integer> arr, int start, int end){
+        if(start>=end){
+        return;
+        }
+
+        int pivotIndex = partition(arr, start, end);
+
+        Quick(arr, start, pivotIndex-1);
+        Quick(arr, pivotIndex+1, end);
+    }
+    //Partition function arranges the array such that the elements smaller than pivot are to its left and bigger ones are to the right
+    static int partition(List<Integer> arr, int start, int end){
+         int pivot = arr.get(start); //Taking the first element as pivot
+        int i=start+1, j=end; 
+
+        while(i<=j){
+            if(arr.get(i)<=pivot)
+            i++;
+            else if(arr.get(j)>pivot)
+            j--;
+            else{
+                swap(arr, i, j);
+                i++;
+                j--;
+            }
+        }  
+        swap(arr, start, j);
+        return j;    
+    }
+
+    static void swap(List<Integer> arr, int i, int j){
+        int temp = arr.get(i);
+        arr.set(i, arr.get(j));
+        arr.set(j, temp);
+    }
+}
