@@ -1,0 +1,19 @@
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        //using recursion and bs;
+
+        return mountain(arr, 0, arr.length-1);
+    }
+
+    int mountain(int[] arr, int s, int e){
+        int mid = s + (e-s)/2;
+        if(s>=e)
+        return e;
+
+        if(arr[mid]<arr[mid+1])
+        return mountain(arr, mid+1, e);
+        else{
+        return mountain(arr, s, mid);
+        }
+    }
+}
