@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+public class Solution {
+    public static int findPages(ArrayList<Integer> arr, int n, int m) {
+        // Write your code here.
+        if(n<m)
+        return -1;
+        
+        int e = Arraysum(arr, n, 0);
+        return minPages(arr, 0, e, m, -1);
+    }
+
+    static int minPages(ArrayList<Integer> arr, int s, int e, int m, int ans){
+        if(s>e)
+        return ans;
+
+        int mid = s + (e-s)/2;
+        int pages=0;
+        int count=1;
+
+        if(isPossible(arr, mid, m, 0, pages, count)){
+            ans = mid;
+            return minPages(arr, 0, mid-1, m, ans);
+        }
+        else
+            return minPages(arr, mid+1, e, m, ans);
+
+    }
+
+    static boolean isPossible(ArrayList<Integer> arr, int mid, int m, int i, int pages, int count){
+
+        if(i==arr.size())
+        return true;
+
+        if(pages+arr.get(i)<=mid){
+        pages+=arr.get(i);
+        }
+        else{
+            count++;
+            if(count>m || arr.get(i)>mid)
+            return false;
+
+            pages = arr.get(i);
+        }
+
+        return isPossible(arr, mid, m, i+1, pages, count);
+    }
+
+    static int Arraysum(ArrayList<Integer> arr, int n, int sum){
+        if(n<=0)
+        return sum;
+
+        return Arraysum(arr, n-1, sum+arr.get(n-1));
+    }
+}
