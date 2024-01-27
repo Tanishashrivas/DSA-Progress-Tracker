@@ -1,0 +1,28 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+class Solution {
+    public static ArrayList<String> subsequences(String str) {
+        // Write your code here
+        ArrayList<String> ans = new ArrayList<String>();
+
+        solve(ans, "", 0, str);
+
+        return ans;
+    }
+
+    static void solve(ArrayList<String> ans, String temp, int index, String str){
+        
+        if(index>= str.length()){
+            if(temp.length()!=0)
+            ans.add(temp);
+            return;
+        }
+        //exclude the char
+        solve(ans, temp, index+1, str);
+        //include the char
+        temp+= str.charAt(index);
+        solve(ans, temp, index+1, str);
+    }
+}
