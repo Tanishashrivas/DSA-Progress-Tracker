@@ -6,3 +6,4 @@
 [Peak Index in a Mountain Array](https://leetcode.com/problems/peak-index-in-a-mountain-array/)<br>
 [Quick Sort](https://www.codingninjas.com/studio/problems/quick-sort_983625)<br>
 [Search in Rotated Sorted Array](https://leetcode.com/problems/search-in-rotated-sorted-array/description/)<br>
+[Subsets](https://leetcode.com/problems/subsets/) <br>
