@@ -1,0 +1,26 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        String[] mapping = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        List<String> ans = new ArrayList<>();
+
+        if(digits.length()==0) return ans;
+
+        solve(digits, ans, "", 0, mapping);
+        return ans;
+    }
+
+    void solve(String digits, List<String> ans, String temp, int index, String[] mapping){
+        if(index>=digits.length()){
+            ans.add(temp);
+            return;
+        }
+
+        int num = (digits.charAt(index) - '0');// taking keypad number's value from digits string.
+
+        for(int i=0;i<mapping[num].length();i++){
+            temp+= mapping[num].charAt(i);
+            solve(digits, ans, temp, index+1, mapping);
+            temp = temp.substring(0, temp.length()-1);
+        }        
+    }
+}
