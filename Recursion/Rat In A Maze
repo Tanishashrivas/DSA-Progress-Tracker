@@ -1,0 +1,62 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static ArrayList < String > findSum(int[][] arr, int n) {
+        // Write your code here.
+        ArrayList < String > ans = new ArrayList<>();
+        int[][] visited = new int[n][n];
+
+        for(int[] row: visited){
+            Arrays.fill(row, 0);
+        }
+        int srcx=0, srcy=0;
+
+        if(arr[0][0]==0) return ans;
+
+        solve(arr, ans, "", n, srcx, srcy, visited);
+        Collections.sort(ans);
+        return ans;
+    }
+    static void solve(int[][] arr, ArrayList < String > ans, String temp, int n, int x, int y, int[][] visited){
+        //base condition
+        if(x==n-1 && y==n-1){
+            ans.add(temp);
+            return;
+        }
+        visited[x][y] = 1;
+
+        int newx=x, newy=y;
+        //down 
+        newx = x + 1;
+        newy = y;
+        if(isPossible(arr, visited, n, newx, newy)){
+            solve(arr, ans, temp + "D", n, newx, newy, visited);
+        }
+        //left 
+        newx = x;
+        newy = y-1;
+        if(isPossible(arr, visited, n, newx, newy)){
+            solve(arr, ans, temp + "L", n, newx, newy, visited);
+        }
+        //right 
+        newx = x;
+        newy = y+1;
+        if(isPossible(arr, visited, n, newx, newy)){
+            solve(arr, ans, temp + "R", n, newx, newy, visited);
+        }
+        //up 
+        newx = x - 1;
+        newy = y;
+        if(isPossible(arr, visited, n, newx, newy)){
+            solve(arr, ans, temp + "U", n, newx, newy, visited);
+        }
+
+        visited[x][y] = 0;
+    }
+    static boolean isPossible(int[][] arr,  int[][] visited, int n, int x, int y){
+        if((x>=0 && x<n) && (y>=0 && y<n) && visited[x][y]==0 && arr[x][y]==1){
+            return true;
+        }
+        return false;
+    }
+}
