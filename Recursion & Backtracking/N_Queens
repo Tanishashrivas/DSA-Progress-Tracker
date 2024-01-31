@@ -1,0 +1,66 @@
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+        char[][] matrix = new char[n][n];
+        List<List<String>> ans = new ArrayList<List<String>>();
+
+        if(n==0) return ans;
+        //initializing it with dots
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                matrix[i][j] = '.';
+            }
+        }
+
+        solve(matrix, ans, n, 0);
+        return ans;
+    }
+    void solve(char[][] matrix, List<List<String>> ans, int n, int row){
+        if(row==n){
+            ArrayList<String> temp = new ArrayList<>();
+            for(char[] r: matrix){
+                String s = new String(r);
+                temp.add(s);
+            }
+            ans.add(temp);
+            return;
+        }
+
+        for(int i=0;i<n;i++){
+          if(isSafe(n, row, matrix, i)){
+            matrix[row][i]='Q';
+            solve(matrix, ans, n, row+1);
+            matrix[row][i]='.';
+          }
+        }
+    }
+
+    boolean isSafe(int n, int row, char[][] matrix, int col){
+        //column
+        for(int i=0;i<row;i++){
+            if(matrix[i][col]=='Q')
+            return false;
+        }
+
+        //left diagonal
+        int i=row-1, j=col-1;
+        while(i>=0 && j>=0){
+            if(matrix[i][j]=='Q')
+            return false;
+
+            i--;
+            j--;
+        }
+
+        //right diagonal
+        i=row-1; j=col+1;
+        while(i>=0 && j<n){
+            if(matrix[i][j]=='Q')
+            return false;
+
+            i--;
+            j++;
+        }
+
+        return true;
+    }
+}
