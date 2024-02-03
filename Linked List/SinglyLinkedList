@@ -1,48 +1,38 @@
-class Link {
+class Node {
     int data;
-    Link next;
-    Link prev;
+    Node next;
 
-    Link(int data) {
+    Node(int data) {
         this.data = data;
         this.next = null;
-        this.prev = null;
     }
 }
 
-public class circularLinked {
-    static Link head, tail;
+public class singlyLinkedList {
+    static Node head, tail;
 
     static void insertAtHead(int data) {
-        Link temp = new Link(data);
-       if(head==null){
-        head = tail = temp;
-        return;
-       }
-
-       temp.next = head;
-       temp.prev = tail;
-       head.prev = temp;
-       tail.next = temp;
-       head = temp;
-    }
-
-    static void insertAtTail(int data) {
-        Link temp = new Link(data);
+        Node temp = new Node(data);
         if(head==null){
             head = tail = temp;
             return;
            }
-
-        tail.next = temp;
-        temp.prev = tail;
         temp.next = head;
-        head.prev = temp;
+        head = temp;
+    }
+
+    static void insertAtTail(int data) {
+        Node temp = new Node(data);
+        if(head==null){
+            head = tail = temp;
+            return;
+           }
+        tail.next = temp;
         tail = temp;
     }
 
     static void insertAtPosition(int position, int data) {
-        Link temp = head;
+        Node temp = head;
 
         if (position == 1) {
             insertAtHead(data);
@@ -56,64 +46,54 @@ public class circularLinked {
             count++;
         }
 
-        if (temp == null || temp.next == null) {
+        if(temp == null || temp.next == null){
             insertAtTail(data);
             return;
-        }
-        Link curr = new Link(data);
+            }
+        Node curr = new Node(data);
         curr.next = temp.next;
-        temp.next.prev = curr;
         temp.next = curr;
-        curr.prev = temp;
     }
-
-    static void deleteNode(int position) {
-        if (position == 1) {
-            // deletion at start
+    static void deleteNode(int position){
+        if(position == 1){
+            // deletion at start 
             head = head.next;
-            head.prev = tail;
-        } else if(position<=getLength(head)){
+        }
+        else if(position<=getLength(head)){
             // deletion at middle or end pos
-            Link curr = head;
-            Link previous = null;
-            int count = 1;
+            Node curr = head;
+            Node prev = null;
+            int count=1;
 
-            while (count < position) {
-                previous = curr;
+            while(count< position){
+                prev = curr;
                 curr = curr.next;
                 count++;
             }
 
-            if(curr.next!= null){
-                curr.next.prev = previous;
-                // previous.next = curr.next;
-            }
-            previous.next = curr.next;
-            //handling tail
-            if (previous.next == null) {
-                tail = previous;
+            prev.next = curr.next;
+            if(prev.next==null){
+                tail = prev;
             }
         }
         else
         System.out.println("Please enter a valid position");
     }
 
-    static void printList(Link head) {
-        Link temp = head;
+    static void printList(Node head) {
+        Node temp = head;
 
-        while (temp.next.data != head.data) {
+        while (temp != null) {
             System.out.print(temp.data + " ");
             temp = temp.next;
         }
-        System.out.println();
     }
-
-    static int getLength(Link head) {
-        Link temp = head;
+    static int getLength(Node head) { 
+        Node temp = head;
         int length = 0;
 
-        while (temp.next.data != head.data) {
-            length++;
+        while (temp != null) {
+           length++;
             temp = temp.next;
         }
 
@@ -121,25 +101,19 @@ public class circularLinked {
     }
 
     public static void main(String[] args) {
-        // Link n = new Link(5);
-        // head = n; tail = n;
+        // Node n1 = new Node(54);
+        // head = n1;
+        // tail = n1;
 
-        insertAtHead(4);
-        insertAtHead(3);
-        insertAtHead(2);
-        insertAtTail(7);
-        insertAtTail(8);
-        insertAtTail(9);
-        insertAtPosition(4,5);
-        insertAtPosition(5,6);
-        insertAtTail(9);
+        insertAtHead(30);
         insertAtHead(10);
-        insertAtHead(11);
-
-        // deleteNode(1);
-        // deleteNode(8);
+        insertAtPosition(3, 5);
+        insertAtTail(23);
+        insertAtTail(45);
+        deleteNode(4);
+        deleteNode(5);
+        System.out.println(tail.data);
+        
         printList(head);
-        // getLength(head);
-
     }
 }
