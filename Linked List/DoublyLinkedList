@@ -1,0 +1,139 @@
+class Link {
+    int data;
+    Link next;
+    Link prev;
+
+    Link(int data) {
+        this.data = data;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+public class doublyLinked {
+    static Link head, tail;
+
+    static void insertAtHead(int data) {
+        Link temp = new Link(data);
+       if(head==null){
+        head = tail = temp;
+        return;
+       }
+
+       temp.next = head;
+       head.prev = temp;
+       head = temp;
+    }
+
+    static void insertAtTail(int data) {
+        Link temp = new Link(data);
+        if(head==null){
+            head = tail = temp;
+            return;
+           }
+
+        tail.next = temp;
+        temp.prev = tail;
+        tail = temp;
+    }
+
+    static void insertAtPosition(int position, int data) {
+        Link temp = head;
+
+        if (position == 1) {
+            insertAtHead(data);
+            return;
+        }
+
+        int count = 1;
+
+        while (count < position - 1) {
+            temp = temp.next;
+            count++;
+        }
+
+        if (temp == null || temp.next == null) {
+            insertAtTail(data);
+            return;
+        }
+        Link curr = new Link(data);
+        curr.next = temp.next;
+        temp.next.prev = curr;
+        temp.next = curr;
+        curr.prev = temp;
+    }
+
+    static void deleteNode(int position) {
+        if (position == 1) {
+            // deletion at start
+            head = head.next;
+            head.prev = null;
+        } else if(position<=getLength(head)){
+            // deletion at middle or end pos
+            Link curr = head;
+            Link previous = null;
+            int count = 1;
+
+            while (count < position) {
+                previous = curr;
+                curr = curr.next;
+                count++;
+            }
+
+            if(curr.next!= null){
+                curr.next.prev = previous;
+                // previous.next = curr.next;
+            }
+            previous.next = curr.next;
+            //handling tail
+            if (previous.next == null) {
+                tail = previous;
+            }
+        }
+        else
+        System.out.println("Please enter a valid position");
+    }
+
+    static void printList(Link head) {
+        Link temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    static int getLength(Link head) {
+        Link temp = head;
+        int length = 0;
+
+        while (temp != null) {
+            length++;
+            temp = temp.next;
+        }
+
+        return length;
+    }
+
+    public static void main(String[] args) {
+        // Link n = new Link(5);
+        // head = n; tail = n;
+
+        insertAtHead(4);
+        insertAtHead(3);
+        insertAtHead(2);
+        insertAtTail(7);
+        insertAtTail(8);
+        insertAtTail(9);
+        insertAtPosition(4,5);
+        insertAtPosition(5,6);
+        insertAtTail(9);
+
+        deleteNode(1);
+        deleteNode(8);
+        printList(head);
+        // getLength(head);
+
+    }
+}
