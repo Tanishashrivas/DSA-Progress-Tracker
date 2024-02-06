@@ -1,0 +1,36 @@
+public class Solution {
+    
+    public static Node kReverse(Node head, int k) {
+        // Write your code here.
+        Node temp = head;
+        int length = 1;
+
+        while(temp!=null){
+            length++;
+            temp = temp.next;
+        }
+
+        return solve(head, k, length);
+    }
+    static Node solve(Node head, int k, int length){
+        
+        if(head == null || head.next==null || length<k)
+        return head;
+
+        Node curr = head, prev = null, t = null;
+        int i=1;
+
+        while(curr!=null && i<=k){
+            t = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = t;
+
+            i++;
+    }
+    if(head!=null)
+        head.next = solve(curr, k, length-k);
+
+       return prev;
+    }
+}
