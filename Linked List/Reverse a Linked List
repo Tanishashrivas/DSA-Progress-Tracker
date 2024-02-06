@@ -1,0 +1,27 @@
+class Solution {
+    public ListNode reverseList(ListNode head) {
+     // ITERATIVE
+     //  we alter the pointers such that they point in the opposite direction
+       
+      // ListNode prev = null, curr = head;
+
+      // while(curr!=null){
+      //     ListNode temp = curr.next;
+      //     curr.next = prev;
+      //   prev = curr;
+      //   curr = temp;
+      // }
+
+      // return prev;
+    
+
+    // RECURSIVE
+    if(head == null || head.next == null) return head;
+
+       ListNode prev = null;
+       ListNode curr = reverseList(head.next);
+       head.next.next = head;
+       head.next = prev;
+    return curr;
+    }
+}
