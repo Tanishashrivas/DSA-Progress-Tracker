@@ -1,0 +1,76 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        
+    //O(1) approach using floyd's algorithm
+    ListNode slow = head, fast = head, prev;
+
+    while(fast!=null && fast.next!=null){
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    //now slow points in the middle, reverse the list from here
+    prev = slow;
+    slow = slow.next;
+    prev.next = null;
+    while(slow!=null){
+        ListNode t = slow.next;
+        slow.next = prev;
+        prev = slow;
+        slow = t;
+    }
+    //check both the lists
+    fast = head;
+    slow = prev;
+    while(slow!=null){
+        if(slow.val != fast.val)
+        return false;
+
+        slow = slow.next;
+        fast = fast.next;
+    }
+    return true;
+
+        /* // Alt approach
+        //Make a reverse list of half the size of original and compare with the other half
+        if(head == null || head.next == null) return true;
+        
+        int length = 0, mid = 0;
+        ListNode temp = head, reverse = new ListNode(-1);
+
+        while(temp!=null){
+            length++;
+            temp = temp.next;
+        }
+        temp = head;
+        mid = length%2==0?length/2:(length/2)+1;
+        boolean flag = length%2==0?false:true;//odd or even 
+        int i=0;
+
+        while(temp!=null){
+            i++;
+
+            if(i<=mid){
+                if(flag == true && i == mid){
+                temp = temp.next;
+                continue;
+                }
+
+            ListNode add = new ListNode(temp.val);
+            add.next = reverse;
+            reverse = add;
+            }
+            else{
+                if(reverse.val != temp.val)
+                return false;
+
+                reverse = reverse.next;
+            }
+            temp = temp.next;
+            // System.out.print(mid + " "+ length);
+        }
+
+        return true;
+    */
+
+    }
+}
