@@ -1,0 +1,51 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+	public static Node addOne(Node head) {
+		// Write your code here.
+		Node temp = head, prev = temp;
+		int count = 0, length = 0;
+
+		while(temp!=null){
+			if(temp.data == 9)
+			count++;
+			else
+			count = 0;
+
+			prev = temp;
+			temp = temp.next;
+			length++;
+		}
+
+		temp = head;
+
+		if(count == length){
+			prev = new Node(-1);
+			prev.next = temp;
+			
+			while(temp!=null){
+				temp.data = 0;
+				temp = temp.next;
+			}
+			prev.data = 1;
+			head = prev;
+		}
+
+		else if(count>0){
+			int i = 1;
+			while(i<length-count){
+				temp = temp.next;
+				i++;
+			}
+			temp.data = temp.data + 1;
+			temp.next.data = 0;
+		}
+		
+		else{
+			prev.data = prev.data + 1;
+		}
+
+		return head;
+	}
+}
