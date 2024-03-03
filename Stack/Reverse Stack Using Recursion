@@ -1,0 +1,26 @@
+import java.util.Stack;
+
+public class Solution {
+    
+	public static void reverseStack(Stack<Integer> stack) {
+		// write your code here
+		if(stack.isEmpty())
+		return;
+
+		int temp = stack.pop();
+
+		reverseStack(stack);
+		insertAtBottom(stack,temp);
+	}
+
+	static void insertAtBottom(Stack<Integer> s, int temp){
+		if(s.isEmpty()){
+			s.push(temp);
+			return;
+		}
+
+		int x = s.pop();
+		insertAtBottom(s, temp);
+		s.push(x);
+	}
+}
