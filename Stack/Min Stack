@@ -1,0 +1,27 @@
+class MinStack {
+    Stack<Integer> s = new Stack<>();
+    int min = Integer.MAX_VALUE;
+    
+    public void push(int x) {
+       // push the old minimum value when the current 
+        // min value changes after pushing the new value x
+        if(x <= min){          
+            s.push(min);
+            min=x;
+        }
+        s.push(x);
+    }
+    
+    public void pop() {
+        if(s.pop() == min)//2 baar pop hoga i.e. 2 values popped
+        min = s.pop();
+    }
+    
+    public int top() {
+        return s.peek();
+    }
+    
+    public int getMin() {
+        return min;
+    }
+}
