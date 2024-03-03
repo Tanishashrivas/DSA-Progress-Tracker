@@ -1,0 +1,53 @@
+class Solution {
+    public ArrayList<Integer> nextPointer(int[] arr){
+        Stack<Integer> s = new Stack<>();
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        s.push(-1);//for the last element
+
+        for(int i=arr.length-1;i>=0;i--){
+            while(s.peek()!=-1 && arr[s.peek()]>=arr[i]){
+                s.pop();
+            }
+            ans.add(s.peek());
+            s.push(i);
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
+    public ArrayList<Integer> prevPointer(int[] arr){
+        Stack<Integer> s = new Stack<>();
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        s.push(-1); //for the first element
+
+        for(int i=0;i< arr.length;i++){
+            while(s.peek() != -1 && arr[s.peek()]>=arr[i]){
+                s.pop();
+            }
+            ans.add(s.peek());
+
+            s.push(i);
+        }
+        return ans;
+    }
+
+    public int largestRectangleArea(int[] heights) {
+        ArrayList<Integer> next = new ArrayList<>();
+        ArrayList<Integer> prev = new ArrayList<>();
+        int max = 0;
+
+        next = nextPointer(heights);
+        prev = prevPointer(heights);
+
+        for(int i=0;i<heights.length;i++){
+            int l = heights[i];
+            if(next.get(i) == -1){
+                next.set(i, heights.length);
+            }
+            int b = next.get(i) - prev.get(i) - 1;
+
+            int area = l*b;
+            max = Math.max(max,area);
+        }
+        return max;
+    }
+}
