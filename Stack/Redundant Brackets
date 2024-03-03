@@ -1,0 +1,34 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution 
+{
+    public static boolean findRedundantBrackets(String s) 
+    {
+        // Write your code here.
+        Stack<Character> stack = new Stack<>();
+
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+
+            if(ch == '(' || ch == '+' || ch == '-' || ch == '*' || ch == '/')
+                stack.push(ch);
+            else if(ch == ')'){
+
+            boolean op = false; //operator present or not
+                
+                while(stack.peek() != '('){
+                    if(stack.peek() == '+' || stack.peek() == '-' || stack.peek() == '*' || stack.peek() == '/'){
+                        op = true;
+                    }    
+                stack.pop();
+            }
+            if(op == false) return true;
+            stack.pop();
+           }
+        }
+
+        return false;
+    }
+}
