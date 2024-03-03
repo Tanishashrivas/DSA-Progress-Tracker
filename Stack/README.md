@@ -1,4 +1,4 @@
-###Stack Questions
+### Stack Question Links
 
 [Simplify Path](https://leetcode.com/problems/simplify-path/)<br>
 [Largest Rectangle in Histogram](https://leetcode.com/problems/largest-rectangle-in-histogram/description/)<br>
