@@ -1,0 +1,30 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int findMinimumCost(String str) {
+		// Write your code here
+    Stack<Character> s = new Stack<>();
+    int count = 0;
+
+    if(str.length()%2 != 0 ) return -1;
+
+    for(int i=0;i<str.length();i++){
+      char ch = str.charAt(i);
+
+      if(!s.isEmpty() && (ch == '}' && s.peek() == '{')){
+        s.pop();
+      }
+      else{
+        s.push(ch);
+      }
+    }
+
+    int a = 0, b = 0;//pattrn is (a+1)/2 + (b+1)/2
+    while(!s.isEmpty()){
+      if(s.pop() == '{') b++;
+      else a++;
+    }
+
+    return ((a+1)/2) + ((b+1)/2);
+    }
+}
