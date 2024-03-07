@@ -6,3 +6,4 @@
 [Minimum Cost To Make String Valid](https://www.codingninjas.com/studio/problems/minimum-cost-to-make-string-valid_1115770)<br>
 [Reverse Stack Using Recursion](https://www.codingninjas.com/studio/problems/reverse-stack-using-recursion_631875)<br>
 [Min Stack](https://leetcode.com/problems/min-stack/description/)<br>
+[The Celebrity Problem](https://www.codingninjas.com/studio/problems/the-celebrity-problem_982769)<br>
