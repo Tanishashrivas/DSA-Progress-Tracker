@@ -1,0 +1,118 @@
+class MyCircularDeque {
+    private class Node{
+        int data;
+        Node next;
+        Node prev;
+
+        Node(){
+            this.next = null;
+            this.prev = null;
+        }
+    }
+
+    Node front;
+    Node rear;
+    int size;
+    int length;
+
+    public MyCircularDeque(int k) {
+        this.size = k;
+        this.length = 0;
+        this.front = null;
+        this.rear = null;
+    }
+    
+    public boolean insertFront(int value) {
+        if(length == size) return false;
+
+        Node n = new Node();
+        n.data = value;
+
+        if(front == null){
+            front = n;
+            rear = n;
+        }
+        else{
+            n.next = front;
+            front.prev = n;
+            front = n;
+        }
+
+        length++;
+        return true;
+    }
+    
+    public boolean insertLast(int value) {
+        if(length == size) return false;
+
+        Node n = new Node();
+        n.data = value;
+
+        if(rear == null){
+            front = n;
+            rear = n;
+        }
+        else{
+            rear.next = n;
+            n.prev = rear;
+            rear = n;
+        }
+
+        length++;
+        return true;
+    }
+    
+    public boolean deleteFront() {
+        if(isEmpty()) return false;
+
+        if(front == rear){
+            front = null;
+            rear = null;
+        }
+        else{
+        front = front.next;
+        rear.next = front;
+        front.prev = rear;
+        }
+
+        length--;
+        return true;
+    }
+    
+    public boolean deleteLast() {
+        if(isEmpty()) return false;
+
+        if(front == rear){
+            front = null;
+            rear = null;
+        }
+        else{
+        rear = rear.prev;
+        rear.next = front;
+        front.prev = rear;
+        }
+
+        length--;
+        return true;
+    }
+    
+    public int getFront() {
+        return (isEmpty()) ? -1 : front.data;
+    }
+    
+    public int getRear() {
+        return (isEmpty()) ? -1 : rear.data;
+    }
+    
+    public boolean isEmpty() {
+        if(length == 0) return true;
+
+        return false;
+    }
+    
+    public boolean isFull() {
+        if(length == size) return true;
+
+        return false;
+    }
+}
