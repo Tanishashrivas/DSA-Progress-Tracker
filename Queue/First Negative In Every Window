@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Solution {
+	public static int[] firstNegative(int[] arr, int n, int k) {
+        // Write your code here.
+		Queue<Integer> q = new LinkedList<>();
+		int[] ans = new int[n-k+1];
+		int a = 0;
+
+		for(int i=0;i<n;i++){
+			if(arr[i]<0){
+				q.add(i);
+			}
+		}
+
+		for(int i=k-1;i<n;i++){
+			if( !q.isEmpty() && i - q.peek() >= k){
+				q.remove();
+			}
+				ans[a++] = ( !q.isEmpty() && i - q.peek()>=0) ? arr[q.peek()] : 0;
+		}
+		return ans;
+	}
+}
