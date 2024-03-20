@@ -1,0 +1,55 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+    public static long sumOfMaxAndMin(ArrayList<Integer> nums, int n, int k) {
+        // Write your code here.
+       Deque<Integer> mini = new LinkedList<>();
+       Deque<Integer> maxi = new LinkedList<>();
+       long ans = 0 ;
+
+       //calculating for the first window
+       for(int i=0;i<k;i++){
+         while(!mini.isEmpty() && nums.get(mini.peekLast()) >= nums.get(i)){ //increasing order of elements
+           mini.removeLast();
+         }
+
+            while(!maxi.isEmpty() && nums.get(maxi.peekLast()) <= nums.get(i)){ //decreasing order of elements
+           maxi.removeLast();
+            }
+
+           mini.add(i);
+           maxi.add(i);
+
+       }
+
+       for(int i=k;i<n;i++){
+        ans += nums.get(mini.peek()) + nums.get(maxi.peek());
+
+           //removal
+            while(!mini.isEmpty() && i-mini.peek() >=k)
+           mini.remove();
+
+           while(!maxi.isEmpty() && i-maxi.peek() >= k)
+           maxi.remove();
+
+           //addition 
+           while(!mini.isEmpty() && nums.get(mini.peekLast()) >= nums.get(i)){ //increasing order of elements
+           mini.removeLast();
+         }
+
+            while(!maxi.isEmpty() && nums.get(maxi.peekLast()) <= nums.get(i)){ //decreasing order of elements
+           maxi.removeLast();
+            }
+
+           mini.add(i);
+           maxi.add(i);
+
+       }
+       //for last window
+        ans+= nums.get(mini.peek()) + nums.get(maxi.peek());
+
+       return ans;
+    }
+}
