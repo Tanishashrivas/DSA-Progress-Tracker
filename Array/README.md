@@ -9,3 +9,4 @@
 [Search an element in a matriix](https://leetcode.com/problems/search-a-2d-matrix/description/) <br>
 [Sieve of Eratosthenes](https://leetcode.com/problems/count-primes/description/) <br>
 [Given an array which consists of only 0, 1 and 2](https://leetcode.com/problems/sort-colors/description/) <br>
+[Spiral Matrix](https://leetcode.com/problems/spiral-matrix/)<br>
