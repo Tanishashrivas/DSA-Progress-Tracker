@@ -1,0 +1,63 @@
+/*
+ Following is the TreeNode structure:
+
+ class TreeNode {
+     int data;
+     TreeNode left;
+     TreeNode right;
+     TreeNode() {
+         this.data = 0;
+         this.left = null;
+         this.right = null;
+     }
+*/
+
+import java.util.*;
+public class Solution {
+   static void inOrder(TreeNode root,  List<Integer> temp){
+        if(root == null){
+            return;
+        }
+
+        inOrder(root.left, temp);
+        temp.add(root.data);
+        inOrder(root.right, temp);
+    }
+    static void preOrder(TreeNode root,  List<Integer> temp){
+         if(root == null){
+            return;
+        }
+
+        temp.add(root.data);
+         preOrder(root.left, temp);
+        preOrder(root.right, temp);
+    }
+    static void postOrder(TreeNode root,  List<Integer> temp){
+         if(root == null){
+            return;
+        }
+
+         postOrder(root.left, temp);
+        postOrder(root.right, temp);
+        temp.add(root.data);
+    }
+    public static List<List<Integer>> getTreeTraversal(TreeNode root) {
+        // Write your code here.
+        List<List<Integer>> ans = new ArrayList<>();
+        List<Integer> temp1 = new ArrayList<>();
+        List<Integer> temp2 = new ArrayList<>();
+        List<Integer> temp3 = new ArrayList<>();
+
+
+        if(root == null) return ans;
+
+        inOrder(root, temp1);
+        ans.add(temp1);
+        preOrder(root, temp2);
+        ans.add(temp2);
+        postOrder(root, temp3);
+        ans.add(temp3);
+
+        return ans;
+    }
+}
