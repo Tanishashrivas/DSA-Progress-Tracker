@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class Solution {
+    static void solveLeft(TreeNode root, List<Integer> ans){
+        if(root == null) return;
+
+      if(root.left != null || root.right != null)
+        ans.add(root.data);
+
+        solveLeft(root.left, ans);
+        if(root.left == null)
+        solveLeft(root.right, ans);
+    }
+     static void solveLeaf(TreeNode root, List<Integer> ans){
+        if(root == null) return;
+
+        if(root.left == null && root.right == null)
+        ans.add(root.data);
+
+        solveLeaf(root.left, ans);
+        solveLeaf(root.right, ans);
+    }
+    static void solveRight(TreeNode root, List<Integer> ans){
+        if(root == null) return;
+
+        solveRight(root.right, ans);
+         if(root.right == null)
+        solveRight(root.left, ans);
+
+        if(root.left != null || root.right != null) //so that the data gets added in reverse order.
+        ans.add(root.data);
+    }
+    public static List<Integer> traverseBoundary(TreeNode root){
+        List<Integer> ans = new ArrayList<>();
+        if(root == null) return ans;
+
+        ans.add(root.data);
+        
+        solveLeft(root.left, ans);
+        solveLeaf(root, ans);
+        solveRight(root.right, ans);
+
+        return ans;
+    }
+}
