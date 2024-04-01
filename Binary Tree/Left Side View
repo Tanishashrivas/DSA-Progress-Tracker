@@ -1,0 +1,20 @@
+public class Solution {
+    static int level = 0;
+    public static void printLeftView(TreeNode<Integer> root) {
+        // Write your code here.
+        solve(root, 0);
+    }
+
+    static void solve(TreeNode<Integer> root, int index){
+         if(root == null)
+        return;
+
+        if(level == index){
+        System.out.print(root.data + " ");
+        level++;
+        }
+
+        solve(root.left, index+1);
+        solve(root.right, index+1);
+    }
+}
