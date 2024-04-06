@@ -1,0 +1,43 @@
+import java.util.*;
+
+public class Solution {
+    public static List<Integer> getTopView(TreeNode root) {
+        // Write your code here.
+        HashMap<Integer, Integer> mp = new LinkedHashMap<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        mp.put(root.data, 0);
+
+        int min = 0;
+
+        while(!q.isEmpty()){
+            TreeNode t = q.remove();
+            ans.add(0);
+            int index = mp.get(t.data);
+
+            if(t.left != null){
+                q.add(t.left);
+                mp.put(t.left.data, index-1);
+                min = Math.min(min, index-1);
+            }
+            if(t.right != null){
+                q.add(t.right);
+                mp.put(t.right.data, index+1);
+            }
+        }
+
+        for(Map.Entry<Integer, Integer> set: mp.entrySet()){
+            if(ans.get(set.getValue()-min) == 0)
+            ans.set(set.getValue()-min, set.getKey());
+        }
+
+        Iterator<Integer> i = ans.iterator();
+
+        while(i.hasNext()){
+            if(i.next() == 0) i.remove();
+        }
+
+        return ans;
+    }
+}
