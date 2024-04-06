@@ -1,0 +1,42 @@
+import java.util.*;
+
+public class Solution {
+    public static List<Integer> bottomView(TreeNode root) {
+        HashMap<Integer, Integer> mp = new LinkedHashMap<>(); // for storing node and index pair
+        ArrayList<Integer> ans = new ArrayList<>(); //to store answer order
+        Queue<TreeNode> q = new LinkedList<>(); // for level order traversal
+        q.add(root);
+        mp.put(root.val, 0);
+
+        int min = 0;
+
+        while(!q.isEmpty()){
+            TreeNode t = q.remove();
+            ans.add(0);
+            int index = mp.get(t.val);
+
+            if(t.left != null){
+                q.add(t.left);
+                mp.put(t.left.val, index-1);
+                min = Math.min(min, index-1);
+            }
+            if(t.right != null){
+                q.add(t.right);
+                mp.put(t.right.val, index+1);
+            }
+        }
+
+        for(Map.Entry<Integer, Integer> set: mp.entrySet()){
+            // if(ans.get(set.getValue()-min) == 0)
+            ans.set(set.getValue()-min, set.getKey());
+        }
+
+        Iterator<Integer> i = ans.iterator();
+
+        while(i.hasNext()){
+            if(i.next() == 0) i.remove();
+        }
+
+        return ans;         
+    }
+}
