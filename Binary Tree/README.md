@@ -9,6 +9,10 @@
 [Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/description/)<br>
 [Lowest Common Ancestor of a Binary Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)<br>
 [Maximum Path Sum](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/)<br>
+[Maximum Width of Binary Tree](https://leetcode.com/problems/maximum-width-of-binary-tree/description/)<br>
+[ Maximum sum path from the leaf to root](https://www.naukri.com/code360/problems/maximum-sum-path-from-the-leaf-to-root_975299?leftPanelTabValue=PROBLEM)<br>
+[Mirror Tree](https://leetcode.com/problems/symmetric-tree/description/)<br>
+[ Path Sum III ( k sum paths )](https://leetcode.com/problems/path-sum-iii/description/)<br>
 [Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/description/)<br>
 [Top View](https://www.naukri.com/code360/problems/top-view-of-binary-tree_799401?leftPanelTabValue=PROBLEM)<br>
 [Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/)<br>
