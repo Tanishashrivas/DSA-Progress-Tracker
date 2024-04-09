@@ -1,0 +1,41 @@
+class Solution {
+    public int pathSum(TreeNode root, int targetSum) {
+          //HashMap
+          HashMap<Long, Integer> mp = new HashMap<>(); //<currSum, frequency>
+          mp.put((long)0,1);
+          return countSum(root, targetSum, mp, 0);
+    }
+
+    int countSum(TreeNode root, int targetSum, HashMap<Long, Integer> mp, long currSum){
+        if(root == null) return 0;
+
+        currSum += root.val;
+        int res = mp.getOrDefault(currSum-targetSum, 0);
+        mp.put(currSum, mp.getOrDefault(currSum, 0) + 1);
+
+        res += countSum(root.left, targetSum, mp, currSum) + countSum(root.right, targetSum, mp, currSum);
+        mp.put(currSum, mp.get(currSum)-1);
+        return res;
+    }
+
+        /* //dfs
+        if(root == null) return 0;
+
+        solve(root, targetSum, 0);
+        pathSum(root.left, targetSum);
+        pathSum(root.right, targetSum);
+        return count;
+    }
+    int count = 0;
+    void solve(TreeNode root, int targetSum, long sum){
+        if(root == null) return;
+
+        sum+= root.val;
+
+        if(sum == targetSum) count++;
+        
+        solve(root.left, targetSum, sum);
+        solve(root.right, targetSum, sum);
+    }
+    */
+}
