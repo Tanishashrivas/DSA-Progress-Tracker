@@ -1,0 +1,54 @@
+import java.util.* ;
+import java.io.*; 
+/*******************************************************
+
+	Following is the BinaryTreeNode class structure
+
+	class BinaryTreeNode<T> {
+    	T data;
+    	BinaryTreeNode<T> left;
+    	BinaryTreeNode<T> right;
+    
+    	public BinaryTreeNode(T data) {
+        this.data = data;
+    	}
+	}
+
+*******************************************************/
+
+public class Solution {
+	static int max;
+    public static List<Integer> maxSum(BinaryTreeNode<Integer> root) {
+        // Write you code here.
+		List<Integer> ans = new ArrayList<Integer>();
+		List<Integer> result = new ArrayList<Integer>();
+		max = Integer.MIN_VALUE;
+
+		solve(root, ans, result, 0);
+		Collections.reverse(result);
+		return result;
+    }
+
+	static void solve(BinaryTreeNode<Integer> root, List<Integer> ans, List<Integer> result, int sum){
+		if(root == null) return;
+
+		ans.add(root.data);
+		sum += root.data;
+
+		if(root.left == null && root.right == null){
+			if(sum > max){
+				max = sum;
+				result.clear();
+
+				for(int i: ans)
+				result.add(i);
+			}
+			ans.remove(ans.size()-1);
+			return;
+			}
+
+		solve(root.left, ans, result, sum);
+		solve(root.right, ans, result, sum);
+		ans.remove(ans.size()-1);
+	}
+}
