@@ -2,6 +2,7 @@
 [Binary Tree Traversals (Pre, In & Post)](https://www.naukri.com/code360/problems/tree-traversal_981269?leftPanelTabValue=PROBLEM)<br>
 [Bottom View](https://www.naukri.com/code360/problems/bottom-view-of-binary-tree_893110)<br>
 [ Boundary Traversal of Binary Tree](https://www.naukri.com/code360/problems/boundary-traversal-of-binary-tree_790725?leftPanelTabValue=PROBLEM)<br>
+[Burn the Tree](https://leetcode.com/problems/amount-of-time-for-binary-tree-to-be-infected/)<br>
 [Check If Binary Tree Is Sum Tree Or Not](https://www.naukri.com/code360/problems/check-if-binary-tree-is-sum-tree-or-not_1164404?leftPanelTabValue=PROBLEM)<br>
 [Diagonal Traversal](https://www.naukri.com/code360/problems/diagonal-traversal_920391?leftPanelTabValue=PROBLEM)<br>
 [Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)<br>
