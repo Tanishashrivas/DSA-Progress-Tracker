@@ -1,0 +1,72 @@
+class Solution {
+    TreeNode mapping(HashMap<TreeNode, TreeNode> nodeToParent, TreeNode root, int start){
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        TreeNode res = new TreeNode(-1);
+        while(!q.isEmpty()) {
+            TreeNode t = q.remove();
+            if(t.val == start) res = t;
+
+            if(t.left != null) {
+                q.add(t.left);
+                nodeToParent.put(t.left, t);
+            }
+            if(t.right != null) {
+                q.add(t.right);
+                nodeToParent.put(t.right, t);
+            }
+        }
+        return res;
+    }
+
+    int solve(TreeNode start, HashMap<TreeNode, TreeNode> nodeToParent){
+        Queue<TreeNode> q = new LinkedList<>();
+        HashMap<TreeNode, Boolean> visited = new HashMap<>();
+        int ans = 0;
+
+        q.add(start);
+        visited.put(start, true);
+
+        while(!q.isEmpty()){
+            int size = q.size();
+            boolean flag = false; //no changes were made to the queue
+
+            for(int i=0;i<size;i++){
+                TreeNode t = q.remove();
+                // System.out.print(t.val + " ");
+
+                if(t.left != null && visited.get(t.left) == null){
+                    q.add(t.left);
+                    flag = true;
+                    visited.put(t.left, true);
+                }
+
+                if(t.right != null && visited.get(t.right) == null){
+                    q.add(t.right);
+                    flag = true;
+                    visited.put(t.right, true);
+                }
+
+                if(nodeToParent.get(t) != null && visited.get(nodeToParent.get(t)) == null){
+                    q.add(nodeToParent.get(t));
+                    flag = true;
+                    visited.put(nodeToParent.get(t), true);
+                }
+            }
+
+            if(flag) ans++; //if changes are made in the queue, increment the time.
+        }
+
+        return ans;
+    }
+
+    public int amountOfTime(TreeNode root, int start) {
+        int ans = 0;
+        HashMap<TreeNode, TreeNode> nodeToParent = new HashMap<>();
+        nodeToParent.put(root, null);
+
+        TreeNode startNode = mapping(nodeToParent, root, start);
+        ans = solve(startNode, nodeToParent);
+        return ans;
+    }
+}
