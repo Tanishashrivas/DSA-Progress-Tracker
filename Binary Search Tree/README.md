@@ -1,4 +1,4 @@
-### BST Questions:
+### BST Questions Links
 
 [Balance a Binary Search Tree](https://leetcode.com/problems/balance-a-binary-search-tree/description/)<br>
 [Convert Sorted List to Binary Search Tree](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/)<br>
