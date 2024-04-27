@@ -1,0 +1,29 @@
+class Solution {
+    void inOrder(TreeNode root, ArrayList<Integer> arr){
+        if(root == null) return;
+
+        inOrder(root.left, arr);
+        arr.add(root.val);
+        inOrder(root.right, arr);
+    }
+    public TreeNode balanceBST(TreeNode root) {
+        ArrayList<Integer> arr = new ArrayList<>();
+        inOrder(root, arr);
+
+        int n = arr.size();
+
+        return construct(0, n-1, arr);
+    }
+
+    TreeNode construct(int start, int end, ArrayList<Integer> arr){
+        if(start > end) return null;
+
+        int mid = start + (end-start)/2;
+        TreeNode newR = new TreeNode(arr.get(mid));
+
+        newR.left = construct(start, mid-1, arr);
+        newR.right = construct(mid+1, end, arr);
+
+        return newR;
+    }
+}
