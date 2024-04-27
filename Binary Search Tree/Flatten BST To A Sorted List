@@ -1,0 +1,53 @@
+import java.util.* ;
+import java.io.*; 
+/************************************************************
+
+ Following is the TreeNode class structure
+     class TreeNode<T>
+     {
+         public:
+             T data;
+             TreeNode<T> left;
+             TreeNode<T> right;
+
+            TreeNode(T data)
+            {
+                this.data = data;
+                left = null;
+                right = null;
+         }
+     };
+ ************************************************************/
+public class Solution
+{
+    public static TreeNode<Integer> flatten(TreeNode<Integer> root)
+    {
+        if(root == null) return null;
+        // Write your code here
+      TreeNode<Integer> head = new TreeNode<>(-1);
+        TreeNode<Integer>[] prev = new TreeNode[]{head}; 
+        flattenTree(root, prev);
+     
+        if (head.right != null) {
+            head.right.left = null;
+        }
+        if(prev[0] != null){
+            prev[0].right = null;
+            prev[0].left = null;
+        }
+        
+        return head.right;
+    }
+
+    static void flattenTree(TreeNode<Integer> root, TreeNode<Integer>[] prev) {
+        if (root == null) return;
+
+        flattenTree(root.left, prev);
+
+        prev[0].left = null;
+        prev[0].right = root;
+        prev[0] = root; 
+
+        flattenTree(root.right, prev);
+    }
+}
