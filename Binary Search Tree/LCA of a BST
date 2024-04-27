@@ -1,0 +1,10 @@
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+       //if p and q belongs to different branches
+       if((p.val <= root.val && root.val <= q.val) || (q.val <= root.val && root.val <= p.val))
+       return root;
+
+       //if they are in the same branch, find which one
+       return p.val < root.val ? lowestCommonAncestor(root.left, p, q) : lowestCommonAncestor(root.right, p, q);
+    }
+}
