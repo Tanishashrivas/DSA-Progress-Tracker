@@ -1,0 +1,24 @@
+class Solution {
+    public boolean findTarget(TreeNode root, int k) {
+      return traverse(root, root, k);
+    }
+    boolean traverse(TreeNode mainRoot, TreeNode root, int k){
+        if(root == null) return false;
+        
+        //traversing for every node
+      return solve(mainRoot, k-root.val, root.val) || traverse(mainRoot, root.left, k) || traverse(mainRoot, root.right, k);
+    }
+
+    boolean solve(TreeNode root, int k, int dupli){
+        if(root == null) return false;
+
+        if(k != dupli && k == root.val){
+          return true;
+        }
+        else if(k < root.val){
+            return solve(root.left, k, dupli);
+        }
+        else
+            return solve(root.right, k, dupli);
+    }
+}
