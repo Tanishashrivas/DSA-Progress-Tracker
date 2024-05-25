@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class Solution {
+    static void dfs(int node, ArrayList<ArrayList<Integer>> adjList, HashMap<Integer,Boolean> visited, ArrayList<Integer> temp){
+        temp.add(node);
+        visited.put(node, true);
+        
+        for(int i=0;i< adjList.get(node).size(); i++){
+            int el = adjList.get(node).get(i);
+
+            if(visited.get(el) != true){
+                dfs(el, adjList, visited, temp);
+            }
+        }
+    }
+    public static ArrayList<ArrayList<Integer>> depthFirstSearch(int v, int e, ArrayList<ArrayList<Integer>> edges) {
+        // Write your code here.
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> adjList = new ArrayList<ArrayList<Integer>>();
+        HashMap<Integer,Boolean> visited = new HashMap<>();
+
+        for(int i=0;i<v;i++){
+          visited.put(i, false);
+          adjList.add(new ArrayList<>());
+        }
+
+        //making adj list
+        for(int i=0;i<e;i++){
+            int u = edges.get(i).get(0);
+            int V = edges.get(i).get(1);
+
+            adjList.get(u).add(V);
+            adjList.get(V).add(u);
+        }
+
+        for(int i=0;i<v;i++){
+            ArrayList<Integer> temp = new ArrayList<>();
+           if(visited.get(i) == false){
+               dfs(i, adjList, visited, temp);
+               ans.add(temp);
+           }
+        }
+
+        return ans; 
+    }
+}
