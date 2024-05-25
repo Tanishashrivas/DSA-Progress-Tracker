@@ -1,0 +1,30 @@
+import java.util.*;
+public class Solution {
+    public static List<Integer> bfsTraversal(int n, List<List<Integer>> adj){
+        // Write your code here
+        HashMap<Integer,Boolean> mp = new HashMap<>();
+        Queue<Integer> q = new LinkedList<>();
+        List<Integer> ans = new ArrayList<>();
+
+        for(int i=0;i<n;i++){
+            mp.put(i, false);
+        }
+
+        q.add(0);
+        mp.put(0, true);
+
+        while(!q.isEmpty()){
+            int front = q.remove();
+            ans.add(front);
+
+            for(int i=0;i<adj.get(front).size();i++){
+                int el = adj.get(front).get(i);
+                if(mp.get(el) == false)
+                q.add(el);
+                mp.put(el, true);
+            }
+        }
+
+        return ans;
+    }
+}
