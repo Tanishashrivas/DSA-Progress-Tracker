@@ -1,0 +1,54 @@
+import java.util.*;
+public class Solution {
+  static boolean dfs(int v,  boolean[] dfsCall, List<List<Integer>> adj, boolean[] visited){
+       
+        visited[v] = true;
+        dfsCall[v] = true;
+        boolean flag = false;
+
+        for(int i=0;i<adj.get(v).size();i++){
+                int el = adj.get(v).get(i);
+
+                if(visited[el] && dfsCall[el]){
+                return true;
+                }
+
+                if(!visited[el]){
+                  flag = dfs(el, dfsCall, adj, visited);
+                  if(flag) return true;
+                }
+            }
+
+            dfsCall[v] = false;
+            return flag;
+    }
+  public static boolean detectCycleInDirectedGraph(int n, ArrayList < ArrayList < Integer >> edges) {
+    
+        List<List<Integer>> adjList = new ArrayList<>();
+       boolean[] visited = new boolean[n];
+       boolean[] dfsCall = new boolean[n];
+       boolean ans = false;
+
+
+        for(int i=0;i<n;i++){
+            adjList.add(new ArrayList<>());
+        }
+
+        for(int i=0;i<edges.size();i++){
+            int u = edges.get(i).get(0) -1;
+            int v = edges.get(i).get(1) -1;
+
+            adjList.get(u).add(v);
+        }
+
+       for(int i=0;i<n;i++){
+          if(!visited[i]){
+          ans = dfs(i, dfsCall, adjList, visited);
+
+          if(ans) return true;
+          }
+       }
+
+       return ans;
+    }
+}
