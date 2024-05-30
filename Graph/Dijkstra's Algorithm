@@ -1,0 +1,57 @@
+import java.util.* ;
+import java.io.*; 
+
+class Pair  {
+	int first;
+	int second;
+
+	Pair(int first, int second){
+		this.first = first;
+		this.second = second;
+	}
+}
+public class Solution {
+	
+	public static ArrayList < Integer > dijkstra(ArrayList< ArrayList < Integer > > vec, int vertices, int edges, int source){
+		// Write your code here.
+		ArrayList<Integer> distance = new ArrayList<>();
+		HashMap<Integer, ArrayList<Pair>> adj = new HashMap<>();
+		PriorityQueue<Pair> pq = new PriorityQueue<>((s1, s2) -> s1.first - s2.first);
+
+        //initialization
+		for(int i=0;i<vertices;i++){ 
+			distance.add(Integer.MAX_VALUE);
+			adj.put(i, new ArrayList<>());
+		}
+
+		//Making adjacency list
+		for(int i=0;i<edges;i++){
+			int u = vec.get(i).get(0);
+			int v = vec.get(i).get(1);
+			int dis = vec.get(i).get(2);
+
+			adj.get(u).add(new Pair(v, dis));
+			adj.get(v).add(new Pair(u, dis));
+		}
+
+		pq.add(new Pair(0, source));
+		distance.set(source, 0);
+
+		while(!pq.isEmpty()){
+			Pair front = pq.remove();
+			int ind = front.second;
+
+			for(int i=0; i < adj.get(ind).size(); i++){
+				int el = adj.get(ind).get(i).first;
+				int weight = adj.get(ind).get(i).second;
+
+				if(distance.get(ind) + weight < distance.get(el)){
+					distance.set(el, distance.get(ind) + weight);
+					pq.add(new Pair(distance.get(el), el));
+				}
+			}
+		}
+
+		return distance;
+	}
+}
