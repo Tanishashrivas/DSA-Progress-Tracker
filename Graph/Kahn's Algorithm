@@ -1,0 +1,62 @@
+class Solution {
+    void bfs(int[] indegree, ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> ans){
+        if(ans.size() >= indegree.length) return;
+
+        Queue<Integer> q = new LinkedList<>();
+
+        //adding 0 indegree elements in the queue
+        for(int i=0;i<indegree.length;i++){
+            if(indegree[i] == 0) q.add(i);
+        }
+
+        if(q.isEmpty()) return;
+
+        while(!q.isEmpty()){
+            int front = q.remove();
+            indegree[front] = -1; //removing the element from checking criteria
+            ans.add(front);
+
+            for(int i=0;i<adj.get(front).size();i++){
+                int el = adj.get(front).get(i);
+
+                indegree[el]--;
+            }
+        }
+
+        bfs(indegree, adj, ans);
+    }
+
+    public int[] findOrder(int v, int[][] edges) {
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        int[] indegree = new int[v];
+
+        for(int i=0;i<v;i++){
+            adj.add(new ArrayList<>());
+        }
+
+        for(int[] row: edges){
+            int u = row[0], vt = row[1];
+
+            adj.get(vt).add(u);
+            indegree[u]++;
+        }
+
+        bfs(indegree, adj, ans);
+
+        if(ans.size() != v) return new int[]{};
+
+        int[] list = new int[v];
+        int a = 0;
+        for(Integer i: ans){
+            list[a++] = i;
+        }
+
+        return list;
+    }
+}
+
+//find indegree of nodes
+//add nodes with 0 indegree to the queue
+//perform bfs and handle indegree
+//repeat
