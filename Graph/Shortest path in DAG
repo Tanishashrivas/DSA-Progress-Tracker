@@ -1,0 +1,73 @@
+class Pair<U, V> {
+    public U first;
+    public V second;
+
+    public Pair(U first, V second) {
+        this.first = first;
+        this.second = second;
+    }
+}
+
+//User function Template for Java
+class Solution {
+    
+    void dfs(int v, HashMap<Integer, ArrayList<Pair<Integer, Integer>>> adj, boolean[] visited, ArrayList<Integer> topo){
+        visited[v] = true;
+        
+        for(int i=0; i< adj.get(v).size(); i++){
+            int el = adj.get(v).get(i).first;
+            
+            if(!visited[el]){
+                dfs(el, adj, visited, topo);
+            }
+        }
+        
+        topo.add(v);
+    }
+
+	public int[] shortestPath(int n,int M, int[][] edges) {
+		//Code here
+		HashMap<Integer, ArrayList<Pair<Integer, Integer>>> adj = new HashMap<>();
+		boolean[] visited = new boolean[n];
+		ArrayList<Integer> topo = new ArrayList<>();
+		int[] distance = new int[n];
+		
+		for(int i=0;i<n;i++){
+		    adj.put(i, new ArrayList<>());
+		}
+		
+		for(int[] row:edges){
+		    adj.get(row[0]).add(new Pair(row[1], row[2]));
+		}
+		
+		for(int i=0;i<n;i++){
+		    if (!visited[i])
+		dfs(i, adj, visited, topo);
+		}
+		
+		Arrays.fill(distance, Integer.MAX_VALUE);
+		distance[0] = 0;
+		
+		for(int i=topo.size()-1; i >=0; i--){
+		    int el = topo.get(i);
+		    
+		    if(distance[el] != Integer.MAX_VALUE){
+		    for(int j=0;j<adj.get(el).size();j++){
+		        int el2 = adj.get(el).get(j).first;
+		        int dis = adj.get(el).get(j).second;
+		        
+		        if(distance[el]+ dis < distance[el2]){
+		            distance[el2] = distance[el] + dis;
+		        }
+		     }
+		  }
+		}
+		
+		for(int i=0;i<distance.length;i++){
+		    if(distance[i] == Integer.MAX_VALUE)
+		    distance[i] = -1;
+		}
+		
+		return distance;
+	}
+}
