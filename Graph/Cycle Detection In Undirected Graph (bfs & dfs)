@@ -1,0 +1,77 @@
+import java.util.*;
+
+public class Solution {
+     static void bfs(int v,  boolean[] visited, HashMap<Integer,Integer> parent, List<List<Integer>> adj, boolean[] ans){
+        Queue<Integer> q = new LinkedList<>();
+
+        q.add(v);
+        visited[v] = true;
+        parent.put(v, -1);
+
+        while(!q.isEmpty()){
+            int front = q.remove();
+
+            for(int i=0;i<adj.get(front).size();i++){
+                int el = adj.get(front).get(i);
+
+                if(visited[el] && parent.get(front) != el){
+                    ans[0] = true;
+                    return;
+                }
+
+                if(!visited[el]){
+                    q.add(el);
+                    visited[el] = true;
+                    parent.put(el, front);
+                }
+            }
+        }
+    }
+
+     static void dfs(int v,  int parent, List<List<Integer>> adj, boolean[] ans, boolean[] visited){
+       
+        visited[v] = true;
+
+            for(int i=0;i<adj.get(v).size();i++){
+                int el = adj.get(v).get(i);
+
+                if(visited[el] && parent != el){
+                    ans[0] = true;
+                    return;
+                }
+
+                if(!visited[el]){
+                    dfs(el, v, adj, ans, visited);
+                }
+            }
+    }
+    public static String cycleDetection(int[][] edges, int n, int m) {
+        // Write your code here.
+        List<List<Integer>> adjList = new ArrayList<>();
+        boolean[] visited = new boolean[n];
+        HashMap<Integer,Integer> parent = new HashMap<>();
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] ans = new boolean[]{false};
+
+        for(int i=0;i<n;i++){
+            adjList.add(new ArrayList<>());
+        }
+
+        for(int i=0;i<m;i++){
+            int u = edges[i][0] -1;
+            int v = edges[i][1] -1;
+
+            adjList.get(u).add(v);
+            adjList.get(v).add(u);
+        }
+
+       for(int i=0;i<n;i++){
+          if(!visited[i])
+        //   bfs(i, visited, parent, adjList, ans);
+        dfs(i, -1, adjList, ans, visited);
+       }
+
+        return ans[0] ? "Yes" : "No";
+    }
+    
+}
