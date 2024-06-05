@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class Solution 
+{
+	 static String bfs(int[][] grid, int r, int c, char ch){
+        Queue<int[] > q = new LinkedList<>();
+
+		int n = grid.length, m = grid[0].length;
+		String str = String.valueOf(ch);
+
+		q.offer(new int[]{r, c});
+		grid[r][c] = 0;
+
+		while(!q.isEmpty()){
+			int[] front = q.poll();
+			int[] dir = {-1, 0, 1, 0, -1};
+			char[] dirCh = {'U', 'R', 'D', 'L'};
+
+			for(int i = 0; i < 4; i++){
+				int nr = front[0] + dir[i];
+				int nc = front[1] + dir[i+1];
+
+				if(nr >=0 && nr < n && nc >=0 && nc < m && grid[nr][nc] == 1){
+					grid[nr][nc] = 0;
+					q.offer(new int[]{nr, nc});
+					str += dirCh[i];
+				}
+			}
+			str += 'B';
+		}
+
+		return str;
+    }
+
+	public static int distinctIsland(int [][] grid, int row, int col) 
+	{
+		HashSet<String> s = new HashSet<>();
+
+       for(int i=0; i<row; i++){
+         for(int j=0;j<col;j++){
+				   if(grid[i][j] == 1){
+					String str = bfs(grid, i, j, 'S');
+			        s.add(str);
+				   }
+		 }
+	   }
+
+	   return s.size();
+	}
+}
