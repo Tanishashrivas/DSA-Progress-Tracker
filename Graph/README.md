@@ -2,6 +2,7 @@
 
 [0 1 matrix](https://leetcode.com/problems/01-matrix/)<br>
 [BFS Traversal of Graph](https://www.naukri.com/code360/problems/bfs-in-graph_973002)<br>
+[Bridge in a Graph](https://leetcode.com/problems/critical-connections-in-a-network/)<br>
 [Cycle Detection In Undirected Graph (bfs & dfs)](https://www.naukri.com/code360/problems/cycle-detection-in-undirected-graph_1062670)<br>
 [DFS Traversal of Graph](https://www.naukri.com/code360/problems/dfs-traversal_630462)<br>
 [Detect Cycle In A Directed Graph (dfs)](https://www.naukri.com/code360/problems/detect-cycle-in-a-directed-graph_1062626?leftPanelTabValue=PROBLEM)<br>
