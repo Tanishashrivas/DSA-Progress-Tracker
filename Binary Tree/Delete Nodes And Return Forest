@@ -1,0 +1,31 @@
+class Solution {
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+        HashSet<TreeNode> hs = new HashSet<>();
+        HashSet<Integer> delNodes = new HashSet<>();
+
+        for(int i: to_delete){
+        delNodes.add(i);
+        }
+
+        helper(root, hs, delNodes);
+        if(!delNodes.contains(root.val)) hs.add(root);
+
+        return new ArrayList<TreeNode>(hs);
+    }
+
+    TreeNode helper(TreeNode root, HashSet<TreeNode> hs, HashSet<Integer> delNodes){
+        if(root == null) return null;
+
+        root.left = helper(root.left, hs, delNodes);
+        root.right = helper(root.right, hs, delNodes);
+
+        if(delNodes.contains(root.val)){
+            if(root.left != null) hs.add(root.left);
+            if(root.right != null) hs.add(root.right);
+
+            return null;
+        }
+        
+        return root;
+    }
+}
