@@ -10,6 +10,7 @@
 [Distinct Islands](https://www.naukri.com/code360/problems/distinct-island_630460?leftPanelTabValue=PROBLEM)<br>
 [Is Graph Bipartitie](https://leetcode.com/problems/is-graph-bipartite/)<br>
 [Kahn's Algorithm](https://leetcode.com/problems/course-schedule-ii/)<br>
+[Nearest Exit from Entrance in Maze](https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/description/)<br>
 [Prim's Algorithm](https://www.naukri.com/code360/problems/prim-s-mst_1095633)<br>
 [Shortest path in DAG](https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1)<br>
 [Shortest path in an unweighted graph](https://www.naukri.com/code360/problems/shortest-path-in-an-unweighted-graph_981297?leftPanelTabValue=PROBLEM)<br>
