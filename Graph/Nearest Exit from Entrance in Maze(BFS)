@@ -1,0 +1,30 @@
+class Solution {
+    public int nearestExit(char[][] maze, int[] entrance) {
+        Queue<int[]> q = new LinkedList<>();
+        int[] dir = { -1, 0, 1, 0, -1 };
+        int m = maze.length, n = maze[0].length;
+    
+
+        maze[entrance[0]][entrance[1]] = '+'; // blocking the entrance
+        q.offer(new int[] { entrance[0], entrance[1], 0 }); // last element of int is the 'steps'
+
+        while (!q.isEmpty()) {
+            int[] front = q.poll();
+
+            for (int i = 0; i < 4; i++) {
+                int newX = front[0] + dir[i], newY = front[1] + dir[i + 1];
+
+                if (newX >= 0 && newX < m && newY >= 0 && newY < n && maze[newX][newY] == '.') {
+                    if (newX == 0 || newX == m - 1 || newY == 0 || newY == n - 1) {
+                        return front[2] + 1;
+                    } else {
+                        q.offer(new int[] { newX, newY, front[2] + 1 });
+                        maze[newX][newY] = '+'; // blocking where you come from
+                    }
+                }
+            }
+        }
+
+        return -1;
+    }
+}
